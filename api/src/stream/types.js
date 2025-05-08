@@ -60,7 +60,12 @@ const getCommand = (args) => {
     return [ffmpeg, args]
 }
 
-const defaultAgent = new Agent();
+const defaultAgent = new Agent({
+    keepAliveTimeout: 60000,
+    keepAliveMaxTimeout: 60000,
+    connections: 100,
+    pipelining: 10,
+});
 
 const proxy = async (streamInfo, res) => {
     const abortController = new AbortController();
